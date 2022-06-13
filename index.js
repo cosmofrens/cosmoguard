@@ -31,17 +31,26 @@ client.on('message', message =>{
 
 //test command
 
-if (command === 'test'){
-    message.channel.send('The bot is working')
-}
+    if (command === 'test'){
+        message.channel.send('The bot is working')
+    }
 
-if (message.content.includes("https://")) {
-    console.log("deleted " + message.content + " from " + message.author)
-    message.delete(1);
-    message.channel.sendMessage("No links here, " + message.author)
-  }
+    if (message.content.includes("https://")) {
+        console.log("deleted " + message.content + " from " + message.author)
+        message.delete(1);
+        message.channel.sendMessage("No links here, " + message.author)
+    }
+})  
 
-
-})
+client.on("guildCreate", guild => {
+    console.log("Nowy serwer, " + guild.name)
+    client.user.setGame(client.guilds.size + " servers / al!help")
+});
+  
+client.on("guildDelete", guild => {
+    console.log("usuniety, " + guild.name)
+    client.user.setGame(client.guilds.size + " servers / al!help")
+});
+  
 
 client.login(process.env.BOT_TOKEN)
