@@ -24,16 +24,16 @@ console.log("Bot is online!")
 });
 
 client.on('message', message =>{
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
+ /*   if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
+    const command = args.shift().toLowerCase();*/
 
 //test command
 
-    if (command === 'test'){
+ /*   if (command === 'test'){
         message.channel.send('The bot is working')
-    }
+    }*/
 
     if (message.content.includes("https://")) {
         console.log("deleted " + message.content + " from " + message.author)
