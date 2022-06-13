@@ -32,7 +32,7 @@ client.on('message', message =>{
 
     if (command === 'test'){
         message.channel.send('The bot is working')
-        message.delete(1)
+        message.delete()
     }
 })
 
