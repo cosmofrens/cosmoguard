@@ -19,7 +19,7 @@ const client= new Discord.Client({
 });
 
 client.on("ready", () => {
-console.log("Bot is online!")
+//console.log("Bot is online!")
 
 });
 
@@ -37,10 +37,13 @@ console.log("Bot is online!")
 
 client.on('message', message =>{
     if (message.content.includes("https://")) {
-
-        message.channel.send('The bot is working')
+        //message.channel.send('The bot is working')
+        console.log("deleted " + message.content + " from " + message.author)
         message.delete(1)
+        message.channel.send("No links here, " + message.author)
     }
+
+
 
 
  /*   if (message.content.includes("https://")) {
