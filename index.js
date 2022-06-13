@@ -41,8 +41,10 @@ client.on('messageCreate', message =>{
         //message.channel.send('The bot is working')
         console.log("deleted " + message.content + " from " + message.author)
         message.channel.send("Sorry, no links here")
-        message.delete()
+        
     }
+
+    return message.delete()
 
  
 })  
@@ -65,4 +67,3 @@ client.on("guildDelete", guild => {
   
 
 client.login(process.env.BOT_TOKEN)
-client.listen(process.env.PORT || 5000)
