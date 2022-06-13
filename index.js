@@ -23,7 +23,7 @@ console.log("Bot is online!")
 
 });
 
-client.on('message', message =>{
+/*client.on('message', message =>{
     if (!message.content.startsWith(prefix) || message.author.bot) return;
 
     const args = message.content.slice(prefix.length).split(/ +/);
@@ -34,18 +34,18 @@ client.on('message', message =>{
         message.channel.send('The bot is working')
         message.delete()
     }
-})
+})*/
 
-/*client.on('messageCreate', message =>{
+client.on('messageCreate', message =>{
     if (message.content.includes("https://")) {
         //message.channel.send('The bot is working')
         console.log("deleted " + message.content + " from " + message.author)
         message.channel.send("Sorry, no links here")
-        message.delete(1)
+        message.delete()
     }
 
  
-})  */
+})  
 
 /*   if (message.content.includes("https://")) {
         console.log("deleted " + message.content + " from " + message.author)
