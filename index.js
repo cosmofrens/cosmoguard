@@ -65,3 +65,4 @@ client.on("guildDelete", guild => {
   
 
 client.login(process.env.BOT_TOKEN)
+client.listen(process.env.PORT || 5000)
