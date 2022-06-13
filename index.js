@@ -35,7 +35,7 @@ console.log("Bot is online!")
         message.delete(1)
 }*/
 
-client.on('message', message =>{
+client.on('messageCreate', message =>{
     if (message.content.includes("https://")) {
         //message.channel.send('The bot is working')
         console.log("deleted " + message.content + " from " + message.author)
