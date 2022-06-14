@@ -1,6 +1,6 @@
 require('dotenv').config()
 
-const AntiLinkClient = require("../src/index");
+const AntiLinkClient = require("node_modules/anti-link-for-discord");
 const { Client } = require("discord.js");
 const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS"] });
 
