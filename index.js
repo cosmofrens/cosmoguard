@@ -1,69 +1,38 @@
 require('dotenv').config()
 
-const Discord = require('discord.js');
+const AntiLinkClient = require("../src/index");
+const { Client } = require("discord.js");
+const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS"] });
 
-const prefix = '!';
-
-const client= new Discord.Client({
-    allowedMentions: {
-        parse: ['users', 'roles'],
-        repliedUser: true,
-    },
-    intents: [
-        "GUILDS",
-        "GUILD_MESSAGES",
-        "GUILD_PRESENCES",
-        "GUILD_MEMBERS",
-        "GUILD_MESSAGE_REACTIONS"
-    ],
+const antilink = new AntiLinkClient({
+  warnMessage: (message) => `${message.author.toString()}, No links.`,
+  muteCount: 5,
+  kickCount: 10,
+  banCount: 15,
+  deleteMessage: true,
 });
 
 client.on("ready", () => {
-console.log("Bot is online!")
-
+  console.log("Bot is online");
 });
 
-/*client.on('message', message =>{
-    if (!message.content.startsWith(prefix) || message.author.bot) return;
-
-    const args = message.content.slice(prefix.length).split(/ +/);
-    const command = args.shift().toLowerCase();
-
-
-    if (command === 'test'){
-        message.channel.send('The bot is working')
-        message.delete()
-    }
-})*/
-
-client.on('messageCreate', message =>{
-    if (message.content.includes("https://")) {
-        //message.channel.send('The bot is working')
-        console.log("deleted " + message.content + " from " + message.author)
-        message.channel.send("Sorry, no links here")
-        message.delete(1000).catch(err => {})
-    }
-
-    
-
- 
-})  
-
-/*   if (message.content.includes("https://")) {
-        console.log("deleted " + message.content + " from " + message.author)
-        message.delete(1);
-        message.channel.send("No links here, " + message.author)
-    }*/
-
-/*client.on("guildCreate", guild => {
-    console.log("Nowy serwer, " + guild.name)
-    client.user.setGame(client.guilds.size + " servers / al!help")
+client.on("messageCreate", (message) => {
+  antilink.handleMessages(message);
 });
-  
-client.on("guildDelete", guild => {
-    console.log("usuniety, " + guild.name)
-    client.user.setGame(client.guilds.size + " servers / al!help")
-});*/
-  
 
-client.login(process.env.BOT_TOKEN)
+antilink.on("muteCountReached", (message, user) => {
+  user.send("You have been muted for sending links");
+  // mute the user here
+});
+
+antilink.on("kickCountReached", (message, user) => {
+  user.send("You have been kicked for sending links");
+  // kick the user here
+});
+
+antilink.on("banCountReached", (message, user) => {
+  user.send("You have been banned for sending links");
+  // ban the user here
+});
+
+client.login(process.env.BOT_TOKEN);
