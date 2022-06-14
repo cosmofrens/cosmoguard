@@ -1,7 +1,7 @@
 require('dotenv').config()
 
 const {Client} = require ('discord.js') //defining stuff 
-const client = new Client()
+const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS"] })
 client.on('ready', () => { //shows that whether your bot is online or not
 		console.log(`
 ◊═══════════════════════════◊
