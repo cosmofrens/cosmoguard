@@ -26,12 +26,8 @@ client.on("messageCreate", async message => { //if you are using djsV13 then cha
     //     if(message.guild.ownerID || message.member.hasPermission("MANAGE_MESSAGES") || message.author.bot) return; //People who can bypass
          if(message.content.includes("https://") || message.content.includes("http://") || message.content.includes("discord.gg/")) { 
          message.delete()//backlisting links and deleting it
-         message.channel.send( //warning the user in embed form because why not? embed looks cool lol
-          new MessageEmbed()
-          .setTitle(`Link detected`) //this is your title
-          .setDescription(`${message.author}, Links are not allowed in this server.`) //this is your description
-          .setColor('#00298c') //You can use 'RANDOM' to chsnge colors if you want
-)}
+         message.channel.send("Sorry, no links here") 
+        }
 })
 
 client.login(process.env.BOT_TOKEN);
