@@ -11,7 +11,7 @@ Channels : ${client.channels.cache.size}
 ◊═══════════════════════════◊
 `)
 });
-client.on("message", async message => { //if you are using djsV13 then change "message" to "messageCreate"
+client.on("messageCreate", async message => { //if you are using djsV13 then change "message" to "messageCreate"
   
          const { MessageEmbed } = require ('discord.js') //sending the message in embed form
          if(message.guild.ownerID || message.member.hasPermission("MANAGE_MESSAGES") || message.author.bot) return; //People who can bypass
@@ -21,9 +21,8 @@ client.on("message", async message => { //if you are using djsV13 then change "m
           new MessageEmbed()
           .setTitle(`Link detected`) //this is your title
           .setDescription(`${message.author}, Links are not allowed in this server.`) //this is your description
-          .setFooter('Powered by NeoBot') //Yeah it's a footer
           .setColor('#00298c') //You can use 'RANDOM' to chsnge colors if you want
-    }
+)}
 })
 
 client.login(process.env.BOT_TOKEN);
