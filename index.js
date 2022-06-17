@@ -1,38 +1,33 @@
 require('dotenv').config()
 
-const AntiLinkClient = require("node_modules/anti-link-for-discord");
-const { Client } = require("discord.js");
-const client = new Client({ intents: ["GUILD_MESSAGES", "GUILDS"] });
+const {Client} = require ('discord.js') //defining stuff 
+const client = new Client({ 
+    allowedMentions: {
+        parse: ['users', 'roles'],
+        repliedUser: true,
+    },
+    
+    intents: ["GUILD_MESSAGES", "GUILDS", "GUILD_PRESENCES",
+"GUILD_MEMBERS",
+"GUILD_MESSAGE_REACTIONS"] })
 
-const antilink = new AntiLinkClient({
-  warnMessage: (message) => `${message.author.toString()}, No links.`,
-  muteCount: 5,
-  kickCount: 10,
-  banCount: 15,
-  deleteMessage: true,
+client.on('ready', () => { //shows that whether your bot is online or not
+		console.log(`
+◊═══════════════════════════◊
+${client.user.username} is now online.
+Name : ${client.user.tag}
+Channels : ${client.channels.cache.size}
+◊═══════════════════════════◊
+`)
 });
-
-client.on("ready", () => {
-  console.log("Bot is online");
-});
-
-client.on("messageCreate", (message) => {
-  antilink.handleMessages(message);
-});
-
-antilink.on("muteCountReached", (message, user) => {
-  user.send("You have been muted for sending links");
-  // mute the user here
-});
-
-antilink.on("kickCountReached", (message, user) => {
-  user.send("You have been kicked for sending links");
-  // kick the user here
-});
-
-antilink.on("banCountReached", (message, user) => {
-  user.send("You have been banned for sending links");
-  // ban the user here
-});
+client.on("messageCreate", async message => { //if you are using djsV13 then change "message" to "messageCreate"
+  
+         const { MessageEmbed } = require ('discord.js') //sending the message in embed form
+    //     if(message.guild.ownerID || message.member.hasPermission("MANAGE_MESSAGES") || message.author.bot) return; //People who can bypass
+         if(message.content.includes("https://") || message.content.includes("http://") || message.content.includes("discord.gg/")) { 
+         message.delete()//backlisting links and deleting it
+         message.channel.send("Sorry, no links here") 
+        }
+})
 
 client.login(process.env.BOT_TOKEN);
